@@ -56,15 +56,38 @@ public class HostItem implements Comparable<HostItem>
 		return isAnnotation() ? getAnnotation() : getIP()+' '+getURL();
 	}
 	
+	public boolean equalsIP(short[] ipIn)
+	{
+		if(isAnnotation())
+			return false;
+		if(ipIn.length!=4)
+			return false;
+		
+		for(int i=0;i<4;i++)
+			if(ipIn[i]!=ip[i])
+				return false;
+		
+		return true;
+	}
 	public boolean equalsIP(HostItem hiIn)
 	{
+		if(isAnnotation())
+			return false;
 		for(short i=0;i<4;i++)
 			if(ip[i]!=hiIn.ip[i])
 				return false;
 		return true;
 	}
+	public boolean equalsURL(String urlIn)
+	{
+		if(isAnnotation())
+			return false;
+		return url.equals(urlIn);
+	}
 	public boolean equalsURL(HostItem hiIn)
 	{
+		if(isAnnotation())
+			return false;
 		return url.equals(hiIn.url);
 	}
 	
